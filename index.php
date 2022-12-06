@@ -6,6 +6,8 @@
     header("Access-Control-Allow-Headers: *");
     
     date_default_timezone_set('Asia/Manila');
-    echo date('Y-m-d h:i:s a');
+    // echo date('Y-m-d h:i:s a');
+
+    echo ('Server is running!');
 ?>
 
