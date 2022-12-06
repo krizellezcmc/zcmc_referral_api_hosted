@@ -75,12 +75,12 @@ switch($method) {
         
         $stmt->bind_param("isssssissssssiiisssi", $patRegister, $patientName, $age, $sex, $address, $ward, $hrn, $admissionDate, $dischDate, $dischDiag, $operation, $surgeon, $operationDate, $resultId, $medId, $bfeedId, $health, $healthOthers,  $instructions, $followupId);
         
-        $updateTagubilin= $db->prepare('UPDATE patient set tagubilin = 1 WHERE FK_psPatRegisters = ?');
-        $updateTagubilin->bind_param('i', $patRegister);
+        // $updateTagubilin= $db->prepare('UPDATE patient set tagubilin = 1 WHERE FK_psPatRegisters = ?');
+        // $updateTagubilin->bind_param('i', $patRegister);
         
 
         if($stmt->execute()) {
-            $updateTagubilin->execute();
+            // $updateTagubilin->execute();
             $data = ['status' => 1, 'message' => "success"];
         } else {
             $data = ['status' => 0, 'message' => "failed"];

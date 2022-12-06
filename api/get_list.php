@@ -8,7 +8,7 @@ $method = $_SERVER['REQUEST_METHOD'];
 switch($method) {
         case 'GET':
             $stmt = $db->prepare("SELECT CONCAT(lastname, ', ', firstname, ' ', middleName) as label, patientId as value, sex as gender, refFacility as facility,tstamp as date, `status`, specialization, age from temp_referral where status = 'pending' OR status = 'accepted'
-             OR status = 'arrived' ORDER BY tstamp DESC");
+             OR status = 'arrived' ORDER BY tstamp ASC");
             $stmt->execute();
             $patients = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
