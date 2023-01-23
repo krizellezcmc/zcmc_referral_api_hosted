@@ -40,8 +40,14 @@ switch($method) {
         $breastfeed = $details->breastfeed;
         $ob = $details->ob;
 
+        if(count($breastfeed) == 0) {
+            $bfeedId = "";
+        } else {
+            $bfeedId = uniqid($patRegister);
+        }
+
         $medId = uniqid($patRegister);
-        $bfeedId = uniqid($patRegister);
+       
         $followupId = uniqid($patRegister);
         $resultId = uniqid($patRegister);
 
@@ -58,6 +64,7 @@ switch($method) {
             add_medication($medId, $medicine, $dosage, $sched, $qty);
         }
 
+       
         foreach($breastfeed as $key => $value) {
             
             $date = $value->date;

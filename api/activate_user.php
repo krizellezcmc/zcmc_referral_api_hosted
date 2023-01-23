@@ -11,7 +11,7 @@ $method = $_SERVER['REQUEST_METHOD'];
             $user = json_decode(file_get_contents('php://input'));
             $userId = $user->userId;
 
-            $remove = $db->prepare(" UPDATE users SET validated = 5 where userId = ?");
+            $remove = $db->prepare(" UPDATE users SET validated = 1 where userId = ?");
             $remove->bind_param("i", $userId);
               
             if($remove->execute()) { 
