@@ -22,11 +22,14 @@ switch($method) {
         $date = date('Y-m-d H:i:s a');
 
         if($hospitalCode==1){
-            $role="opcen";
+            if($department == 'IPCC') {
+                $role = 'ipcc';
+            } else {
+                $role="opcen";
+            }
         }else {
             $role="user";
         }
-
 
         // Check if email exist
         $checkEmail = $db->prepare("SELECT * FROM users WHERE email = ?;");
@@ -35,12 +38,8 @@ switch($method) {
         $res = $checkEmail->get_result();
         
         if (mysqli_num_rows($res) > 0) {
-
             $data = ['status' => 2, 'message' => "Email exist."];
-
         } else {
-            
-
             $stmt = $db->prepare("insert into users(firstName, lastName, contact, email, password, role, FK_hospitalId, accessCode, department, tstamp) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             $stmt->bind_param("ssssssiiss", $firstName, $lastName, $contact, $email, $hashed, $role,$hospitalCode, $accessCode, $department, $date);
                 

@@ -1,8 +1,6 @@
 <?php
 
 include '../connection/config.php';
-include '../functions/send_mail.php';
-include '../accept_body.php';
 
 $method = $_SERVER['REQUEST_METHOD'];
 
@@ -10,11 +8,10 @@ $method = $_SERVER['REQUEST_METHOD'];
         case 'POST':
             $patientRef = json_decode(file_get_contents('php://input'));
             $patId = $patientRef->patId;
-            $date = date('Y-m-d H:i:s a');
-
+            
                 // UPDATE VALIDATION 
-                $stmt = $db->prepare("UPDATE temp_referral SET status = 'arrived', arrival_time = ?, editable = 0 WHERE patientId = ?");
-                $stmt->bind_param("ss", $date, $patId);
+                $stmt = $db->prepare("UPDATE temp_referral SET editable = 0 WHERE patientId = ?");
+                $stmt->bind_param("s", $patId);
                 if($stmt->execute()){
                     $data = ['status' => 1, 'message' => "Success"];
                 }else {

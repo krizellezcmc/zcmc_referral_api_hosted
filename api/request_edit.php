@@ -11,9 +11,9 @@ $method = $_SERVER['REQUEST_METHOD'];
             $patientRef = json_decode(file_get_contents('php://input'));
             $patId = $patientRef->patId;
             $date = date('Y-m-d H:i:s a');
-
+            
                 // UPDATE VALIDATION 
-                $stmt = $db->prepare("UPDATE temp_referral SET status = 'arrived', arrival_time = ?, editable = 0 WHERE patientId = ?");
+                $stmt = $db->prepare("UPDATE temp_referral SET requestEdit = 1, requestTime = ? WHERE patientId = ?");
                 $stmt->bind_param("ss", $date, $patId);
                 if($stmt->execute()){
                     $data = ['status' => 1, 'message' => "Success"];

@@ -13,11 +13,11 @@ $method = $_SERVER['REQUEST_METHOD'];
             $swabDate = $data->swabDate;
             $resultDate = $data->resultDate;
             $patId = $data->patId;
+            $user = $data->user;
             
-           
-            $stmt = $db->prepare("INSERT INTO covid_status(patientId, result, swab_date, result_date) VALUES (?, ?, ?, ?);");
-            $stmt->bind_param("ssss", $patId,  $status, $swabDate, $resultDate);
-                
+            $stmt = $db->prepare("INSERT INTO covid_status(patientId, user, result, swab_date, result_date) VALUES (?, ?, ?, ?, ?);");
+            $stmt->bind_param("sssss", $patId, $user,  $status, $swabDate, $resultDate);
+
             if($stmt->execute()){
                 $data = ['status' => 1, 'message' => "Record successfully created"];
             } else {
